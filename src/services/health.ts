@@ -29,7 +29,7 @@ const getHealthManageData = () => {
       if (currentValue.tagId === value) tag.push(currentValue.tag1, currentValue.tag2, currentValue.tag3)
     })
 
-    const splitedBoj = boj[value].split('-').map((element) => element.trim())
+    const splitedBoj = boj[value].split(' - ')
 
     return {
       title: value,
