@@ -2,5 +2,6 @@
 
 .container {
   @include flexbox.flexbox(center, center);
+  flex-direction: column;
   height: 100vh;
 }
