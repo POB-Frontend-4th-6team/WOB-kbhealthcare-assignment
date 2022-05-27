@@ -1,8 +1,182 @@
 import data from 'assets/jsons/user_info.json'
 import { getScoreDiffMessage } from 'utils/message'
+import { YearsType } from 'types/health'
 
 interface IHealthManageData {
   [key: string]: string
+}
+
+const YEARLY_SCORE = data.healthScoreList
+const USER_SCORE = data.wxcResultMap.wHscore
+
+const calculation = (a: string, b: string | number) => {
+  return Number(a) - Number(b)
+}
+
+const removeStringifiedArray = (array: string) => {
+  return JSON.parse(array)
+}
+
+export const fetchPersonalHealthInfo = () => {
+  let gender
+
+  if (data.wxcResultMap.paramMap.sex === '1') gender = '남자'
+  else gender = '여자'
+
+  console.log('1번', [
+    {
+      name: data.userInfo.userId,
+      healthScore: Number(data.userInfo.healthScore),
+      userGender: gender,
+      age: Number(data.wxcResultMap.paramMap.age),
+      height: Number(data.wxcResultMap.paramMap.resHeight),
+    },
+  ])
+
+  return [
+    {
+      name: data.userInfo.userId,
+      healthScore: Number(data.userInfo.healthScore),
+      userGender: gender,
+      age: Number(data.wxcResultMap.paramMap.age),
+      height: Number(data.wxcResultMap.paramMap.resHeight),
+    },
+  ]
+}
+
+export const fetchYearsChartInfo = () => {
+  const scoreComparedToPreviousYear = calculation(
+    YEARLY_SCORE[YEARLY_SCORE.length - 1].SCORE,
+    YEARLY_SCORE[YEARLY_SCORE.length - 2].SCORE
+  )
+
+  let minusOrPlus
+
+  if (scoreComparedToPreviousYear < 0) minusOrPlus = `${Math.abs(scoreComparedToPreviousYear)}점 낮아졌어요.`
+  else if (scoreComparedToPreviousYear > 0) minusOrPlus = `${scoreComparedToPreviousYear}점 높아졌어요.`
+  else if (scoreComparedToPreviousYear === 0) minusOrPlus = '동일해요.'
+
+  const value = YEARLY_SCORE.map((score) => score.SCORE)
+  const year = YEARLY_SCORE.map((date) => date.SUBMIT_DATE.slice(0, 4))
+
+  const scoreAndYears: YearsType[] = []
+
+  value.forEach((score, i) => {
+    let obj: YearsType = {}
+    obj.value = Number(score)
+    obj.year = year[i]
+    scoreAndYears.push(obj)
+  })
+
+  console.log('2번', {
+    comparison: minusOrPlus,
+    yearsInfo: scoreAndYears,
+  })
+
+  return {
+    comparison: minusOrPlus,
+    yearsInfo: scoreAndYears,
+  }
+}
+
+export const fetchAverageInfo = () => {
+  const calculatedPercent = Math.round(100 - Number(data.wxcResultMap.hscorePercent))
+
+  let percent
+  if (calculatedPercent <= 49) percent = `하위 ${calculatedPercent}%`
+  if (calculatedPercent >= 50) percent = '상위 ${calculatedPercent}%'
+
+  const result = calculation(USER_SCORE, data.wxcResultMap.hscore_peer)
+
+  let comparision
+
+  if (result < 0) comparision = `${Math.abs(result)}점 낮아요.`
+  else if (result > 0) comparision = `${result}점 높아요.`
+  else if (result === 0) comparision = '평균과 같아요'
+
+  console.log('3번', {
+    percent,
+    comparision,
+    score: [
+      {
+        myScore: Number(USER_SCORE),
+        averageScore: Number(data.wxcResultMap.hscore_peer),
+      },
+    ],
+  })
+
+  return {
+    percent,
+    comparision,
+    score: [
+      {
+        myScore: Number(USER_SCORE),
+        averageScore: Number(data.wxcResultMap.hscore_peer),
+      },
+    ],
+  }
+}
+
+const healthForecast = () => {
+  const removeStringified = removeStringifiedArray(data.wxcResultMap.wHscoreDy)
+
+  const forecastValue = removeStringified[removeStringified.length - 1]
+
+  const compareToFuture = calculation(USER_SCORE, forecastValue)
+
+  let comparison
+
+  if (compareToFuture < 0) comparison = `${Math.abs(compareToFuture)}점 높아요.`
+  else if (compareToFuture > 0) comparison = `${compareToFuture}점 낮아요.`
+  else if (compareToFuture === 0) comparison = '현재와 같아요'
+
+  return {
+    comparison,
+    score: [
+      {
+        myScore: Number(USER_SCORE),
+        forecastValue,
+      },
+    ],
+  }
+}
+
+const expenseForecast = () => {
+  const currentExpenseString = data.wxcResultMap.medi
+
+  const forecastArray = removeStringifiedArray(data.wxcResultMap.mediDy)
+
+  const forecastValue = forecastArray[forecastArray.length - 1]
+
+  const formatValue = forecastValue.toLocaleString()
+
+  const expenseComparedToFuture = calculation(currentExpenseString, forecastValue)
+
+  let comparison
+
+  if (expenseComparedToFuture < 0) comparison = `${Math.abs(expenseComparedToFuture).toLocaleString()}원 많아요.`
+  else if (expenseComparedToFuture > 0) comparison = `${expenseComparedToFuture.toLocaleString()}원 적어요.`
+  else if (expenseComparedToFuture === 0) comparison = '현재와 같아요'
+
+  const expense = Number(currentExpenseString).toLocaleString()
+
+  return {
+    comparison,
+    score: [
+      {
+        myScore: expense,
+        forecastValue: formatValue,
+      },
+    ],
+  }
+}
+
+export const fetchForecastInfo = () => {
+  console.log('4번', {
+    health: healthForecast(),
+    expense: expenseForecast(),
+  })
+  return { health: healthForecast(), expense: expenseForecast() }
 }
 
 export const getHealthManageData = () => {
