@@ -1,9 +1,9 @@
 type CompareTarget = 'lastYear' | 'groupAverage' | 'scoreAfterTenYears' | 'costAfterTenYears'
-
+type Message = { increased: string; same: string; decreased: string }
 type IWords = {
   [key in CompareTarget]: {
-    startMessage: { increased: string; same: string; decreased: string }
-    endMessage: { increased: string; same: string; decreased: string }
+    startMessage: Message
+    endMessage: Message
   }
 }
 
