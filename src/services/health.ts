@@ -1,6 +1,6 @@
 import data from 'assets/jsons/user_info.json'
 
-interface IHealthManageObject {
+interface IHealthManageData {
   [key: string]: string
 }
 
@@ -21,7 +21,7 @@ const getHealthManageData = () => {
   const userScore = Number(userInfo.healthScore)
   const wMymaxHscoreDy = JSON.parse(wxcResultMap.wMymaxHscoreDy).filter((val: number) => val > userScore)
 
-  const { boj, paramMap }: { boj: IHealthManageObject; paramMap: IHealthManageObject } = wxcResultMap
+  const { boj, paramMap }: { boj: IHealthManageData; paramMap: IHealthManageData } = wxcResultMap
 
   const covertedHealthManageData = property.map((value) => {
     const tag: string[] = []
