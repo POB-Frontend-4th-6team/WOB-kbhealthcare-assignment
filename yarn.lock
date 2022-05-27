@@ -9639,7 +9639,7 @@ victory-zoom-container@^36.4.1:
     prop-types "^15.8.1"
     victory-core "^36.4.1"
 
-victory@^36.4.0:
+victory@^36.4.1:
   version "36.4.1"
   resolved "https://registry.yarnpkg.com/victory/-/victory-36.4.1.tgz#c9a9988c14c09d2de9c39cd18514458ebe534578"
   integrity sha512-3UGNFz2PwFIOywN26GokG1Rk0tcrBZu8tUeG+eQCKB5kRiIKoO5ytmtQXVH/CNvFyZHkmna7NJJCSu0G914eVg==
