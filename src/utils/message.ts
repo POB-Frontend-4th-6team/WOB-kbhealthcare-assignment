@@ -1,22 +1,53 @@
 type CompareTarget = 'lastYear' | 'groupAverage' | 'scoreAfterTenYears' | 'costAfterTenYears'
 
 type IWords = {
-  [key in CompareTarget]: { unit: string; increased: string; decreased: string }
+  [key in CompareTarget]: {
+    startMessage: { increased: string; same: string; decreased: string }
+    endMessage: { increased: string; same: string; decreased: string }
+  }
 }
 
 const words: IWords = {
-  lastYear: { unit: '점', increased: '높아졌어요', decreased: '낮아졌어요' },
-  groupAverage: { unit: '점', increased: '높아요', decreased: '낮아요' },
-  scoreAfterTenYears: { unit: '점', increased: '높아요', decreased: '낮아요' },
-  costAfterTenYears: { unit: '원', increased: '높아요', decreased: '낮아요' },
+  lastYear: {
+    startMessage: {
+      increased: '건강 점수는 총점이 지난해 보다',
+      same: '건강 점수는 총점이 지난해 평균과',
+      decreased: '건강 점수는 총점이 지난해 보다',
+    },
+    endMessage: { increased: '점 높아졌어요', same: '같아요', decreased: '점 낮아졌어요' },
+  },
+  groupAverage: {
+    startMessage: {
+      increased: '30대 남성 평균점수보다',
+      same: '30대 남성 평균점수와',
+      decreased: '30대 남성 평균점수보다',
+    },
+    endMessage: { increased: '점 높아요', same: '같아요', decreased: '점 낮아요' },
+  },
+  scoreAfterTenYears: {
+    startMessage: {
+      increased: '10년 후 예상 건강점수는 현재 보다',
+      same: '10년 후 예상 건강점수는 현재와',
+      decreased: '10년 후 예상 건강점수는 현재 보다',
+    },
+    endMessage: { increased: '점 높아요', same: '같아요', decreased: '점 낮아요' },
+  },
+  costAfterTenYears: {
+    startMessage: {
+      increased: '10년 후 예상 의료비는 현재 보다',
+      same: '10년 후 예상 의료비는 현재와',
+      decreased: '10년 후 예상 의료비는 현재 보다',
+    },
+    endMessage: { increased: '원 높아요', same: '같아요', decreased: '원 낮아요' },
+  },
 }
 
-export const getScoreDiffMessage = (compareTarget: CompareTarget, score: number) => {
+export const getScoreDiffMessage = (compareTarget: CompareTarget, diff: number) => {
   if (!Object.keys(words).includes(compareTarget)) return '-'
 
-  if (score === 0) return '같아요'
+  const { startMessage, endMessage } = words[compareTarget]
 
-  const { unit, increased, decreased } = words[compareTarget]
-
-  return `${score}${unit} ${score >= 0 ? increased : decreased}`
+  if (diff === 0) return { startMessage: startMessage.same, endMessage: endMessage.same, diff }
+  if (diff > 0) return { startMessage: startMessage.increased, endMessage: `${diff}${endMessage.increased}`, diff }
+  return { startMessage: startMessage.decreased, endMessage: `${diff}${endMessage.decreased}`, diff }
 }
