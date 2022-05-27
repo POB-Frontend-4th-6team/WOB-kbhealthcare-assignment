@@ -18,9 +18,9 @@ const words: IWords = {
   },
   groupAverage: {
     startMessage: {
-      increased: '30대 남성 평균점수보다',
-      same: '30대 남성 평균점수와',
-      decreased: '30대 남성 평균점수보다',
+      increased: '평균점수보다',
+      same: '평균점수와',
+      decreased: '평균점수보다',
     },
     endMessage: { increased: '점 높아요', same: '같아요', decreased: '점 낮아요' },
   },
@@ -42,10 +42,18 @@ const words: IWords = {
   },
 }
 
-export const getScoreDiffMessage = (compareTarget: CompareTarget, diff: number) => {
+export const getScoreDiffMessage = (compareTarget: CompareTarget, diff: number, ageGroup?: string, sex?: string) => {
   if (!Object.keys(words).includes(compareTarget)) return '-'
 
-  const { startMessage, endMessage } = words[compareTarget]
+  let { startMessage, endMessage } = words[compareTarget]
+
+  if (compareTarget === 'groupAverage') {
+    startMessage = {
+      increased: `${ageGroup} ${sex} ${startMessage.increased}`,
+      decreased: `${ageGroup} ${sex} ${startMessage.decreased}`,
+      same: `${ageGroup} ${sex} ${startMessage.same}`,
+    }
+  }
 
   if (diff === 0) return { startMessage: startMessage.same, endMessage: endMessage.same, diff }
   if (diff > 0) return { startMessage: startMessage.increased, endMessage: `${diff}${endMessage.increased}`, diff }

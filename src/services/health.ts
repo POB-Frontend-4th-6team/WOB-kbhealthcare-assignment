@@ -3,14 +3,18 @@ import { getScoreDiffMessage } from 'utils/message'
 
 const getScoreDatas = () => {
   const { wxcResultMap, healthScoreList: yearData } = data
-  const { wHscore, medi, hscore_peer: hscorePeer, wHscoreDy, mediDy, hscorePercent } = wxcResultMap
+  const { wHscore, medi, hscore_peer: hscorePeer, wHscoreDy, mediDy, hscorePercent, paramMap } = wxcResultMap
+  const { age, sex: sexCode } = paramMap
+
   const myScore = Number(wHscore)
   const currentCost = Number(medi)
   const groupAverage = Number(hscorePeer)
   const expectScoreAfterTenYears = Number(JSON.parse(wHscoreDy).pop())
   const expectCostAfterTenYears = Number(JSON.parse(mediDy).pop())
   const myScoreGroupPercent = 100 - Number(hscorePercent)
-
+  const ageGroupNumber = Number(age) - (Number(age) % 10)
+  const ageGroup = ageGroupNumber >= 10 ? `${ageGroupNumber}대` : `10대 미만`
+  const sex = Number(sexCode) === 1 ? '남성' : '여성'
   const currentYear = new Date().getFullYear()
   const scoreLastYear = Number(yearData.find((d) => currentYear - 1 === Number(d.SUBMIT_DATE.slice(0, 4)))?.SCORE)
 
@@ -26,6 +30,8 @@ const getScoreDatas = () => {
     diffCostAfterTenYear,
     yearData,
     myScoreGroupPercent,
+    ageGroup,
+    sex,
   }
 }
 
@@ -37,10 +43,12 @@ const getScoreDiffMessageAll = () => {
     diffCostAfterTenYear,
     yearData,
     myScoreGroupPercent,
+    ageGroup,
+    sex,
   } = getScoreDatas()
 
   let diffScoreLastYearMessage = getScoreDiffMessage('lastYear', diffScoreLastYear)
-  const diffScoreGroupAverageMessage = getScoreDiffMessage('groupAverage', diffScoreGroupAverage)
+  const diffScoreGroupAverageMessage = getScoreDiffMessage('groupAverage', diffScoreGroupAverage, ageGroup, sex)
   const diffScoreAfterTenYearMessage = getScoreDiffMessage('scoreAfterTenYears', diffScoreAfterTenYear)
   const diffCostAfterTenYearMessage = getScoreDiffMessage('costAfterTenYears', diffCostAfterTenYear)
   const myScoreGroupPercentMessage = `상위 ${myScoreGroupPercent}%`
