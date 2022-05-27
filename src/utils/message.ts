@@ -12,7 +12,11 @@ const words: IWords = {
 }
 
 export const getScoreDiffMessage = (compareTarget: CompareTarget, score: number) => {
+  if (!Object.keys(words).includes(compareTarget)) return '-'
+
   if (score === 0) return '같아요'
+
   const { unit, increased, decreased } = words[compareTarget]
+
   return `${score}${unit} ${score >= 0 ? increased : decreased}`
 }
