@@ -17,6 +17,10 @@ const removeStringifiedArray = (array: string) => {
   return JSON.parse(array)
 }
 
+export const fetchUserIdInfo = () => {
+  return data.userInfo.userId
+}
+
 export const fetchPersonalHealthInfo = () => {
   let gender
 
