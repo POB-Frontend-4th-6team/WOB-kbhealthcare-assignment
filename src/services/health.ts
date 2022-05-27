@@ -30,6 +30,9 @@ const getHealthManageData = () => {
     })
 
     const splitedBoj = boj[value].split(' - ')
+    if (value === 'smkQty') splitedBoj[0] = '비흡연 중입니다.'
+    else if (value === 'drnkQty') splitedBoj[0] = '1주일간 음주를 하지 않고 있습니다.'
+    else if (value === 'exerciQty') splitedBoj[0] = '1주일간 운동을 하지 않고 있습니다.'
 
     return {
       title: value,
