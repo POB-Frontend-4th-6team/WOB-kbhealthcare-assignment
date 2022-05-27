@@ -1,12 +1,10 @@
 ﻿import styles from './healthManage.module.scss'
-import { data } from '../_components/HealthManageCard/dummyHealthManageCardData'
 import HealthManageCard from '../_components/HealthManageCard'
 import { getHealthManageData } from 'services/health'
 
 const HealthManage = () => {
   const { wMymaxHscoreDy, healthMangeCardData } = getHealthManageData()
   const MymaxHscoreDy = wMymaxHscoreDy[Math.floor(Math.random() * wMymaxHscoreDy.length)]
-  console.log(getHealthManageData())
 
   return (
     <section className={styles.container}>
