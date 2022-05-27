@@ -1,6 +1,8 @@
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryLine, VictoryScatter } from 'victory'
 import { CallbackArgs } from 'victory-core'
+
 import styles from './yearsChart.module.scss'
+import CHART_STYLE from './chartStyles'
 
 const data = [
   { year: '2015', value: 878 },
@@ -9,17 +11,6 @@ const data = [
   { year: '2020', value: 888 },
   { year: '2021', value: 875 },
 ]
-
-const CHART_STYLE = {
-  value: {
-    x: 'year',
-    y: 'value',
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-}
 
 // datum은 CallbackArgs 타입 안에 있는 값 중 any 타입
 const setColor = (datum: any, recentColor: string, elseColor: string) => {
