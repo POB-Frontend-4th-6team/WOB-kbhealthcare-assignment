@@ -25,7 +25,7 @@ export const fetchPersonalHealthInfo = () => {
 
   console.log('1번', [
     {
-      name: data.userInfo.userId,
+      name: data.userInfo.name,
       healthScore: Number(data.userInfo.healthScore),
       userGender: gender,
       age: Number(data.wxcResultMap.paramMap.age),
