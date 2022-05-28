@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import styles from './routes.module.scss'
 import LoginPage from './LoginPage'
 import MainPage from './MainPage'
+import PrivateRoute from 'layouts/PrivateRoute'
 
 const App = () => {
   return (
@@ -10,10 +11,13 @@ const App = () => {
       <header>header</header>
       <main className={styles.app}>
         <Routes>
-          <Route path='/' element={<MainPage />} />
-          <Route path='login' element={<LoginPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route path='/' element={<MainPage />} />
+          </Route>
           <Route path='*' element={<div>404</div>} />
+          <Route path='login' element={<LoginPage />} />
         </Routes>
+        {/* <CustomRoutes /> */}
       </main>
     </div>
   )
