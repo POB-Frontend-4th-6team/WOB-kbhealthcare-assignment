@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import styles from './routes.module.scss'
 import LoginPage from './LoginPage'
 import MainPage from './MainPage'
+import NotFoundPage from './NotFoundPage'
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='login' element={<LoginPage />} />
-          <Route path='*' element={<div>404</div>} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
