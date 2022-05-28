@@ -15,7 +15,7 @@ const removeStringifiedArray = (array: string) => {
 }
 
 export const fetchUserIdInfo = () => {
-  return data.userInfo.userId
+  return { id: data.userInfo.userId, name: data.userInfo.userId }
 }
 
 export const fetchPersonalHealthInfo = () => {
@@ -65,7 +65,7 @@ export const fetchYearsChartInfo = () => {
   const scoreAndYears: YearsType[] = []
 
   value.forEach((score, i) => {
-    let obj: YearsType = {}
+    const obj: YearsType = {}
     obj.value = Number(score)
     obj.year = year[i]
     scoreAndYears.push(obj)
