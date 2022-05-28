@@ -17,7 +17,6 @@ const App = () => {
           <Route path='*' element={<div>404</div>} />
           <Route path='login' element={<LoginPage />} />
         </Routes>
-        {/* <CustomRoutes /> */}
       </main>
     </div>
   )
