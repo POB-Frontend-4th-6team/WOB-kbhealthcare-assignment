@@ -8,22 +8,24 @@ const HealthScore = () => {
 
   return (
     <div className={styles.healthScoreContainer}>
-      <VictoryPie
-        data={[
-          { x: 1, y: total },
-          { x: 2, y: percent },
-        ]}
-        labels={() => null}
-        startAngle={130}
-        endAngle={-130}
-        animate={{
-          duration: 1000,
-          easing: 'bounce',
-          onLoad: { duration: 1000 },
-        }}
-        innerRadius={120}
-        colorScale={['#eeeeee', '#ffd300']}
-      />
+      <div className={styles.healthScoreChartContainer}>
+        <VictoryPie
+          data={[
+            { x: 1, y: total },
+            { x: 2, y: percent },
+          ]}
+          labels={() => null}
+          startAngle={130}
+          endAngle={-130}
+          animate={{
+            duration: 1000,
+            easing: 'bounce',
+            onLoad: { duration: 1000 },
+          }}
+          innerRadius={120}
+          colorScale={['#eeeeee', '#ffd300']}
+        />
+      </div>
 
       <div className={styles.scoreBox}>
         <h1 className={styles.score}>875</h1>
