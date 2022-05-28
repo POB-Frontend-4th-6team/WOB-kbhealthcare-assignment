@@ -15,8 +15,7 @@ const removeStringifiedArray = (array: string) => {
 }
 
 export const fetchUserIdInfo = () => {
-  console.log([{ userId: data.userInfo.userId, name: data.userInfo.name }])
-  return [{ userId: data.userInfo.userId, name: data.userInfo.name }]
+  return { id: data.userInfo.userId, name: data.userInfo.name }
 }
 
 export const fetchPersonalHealthInfo = () => {
@@ -25,16 +24,6 @@ export const fetchPersonalHealthInfo = () => {
   if (data.wxcResultMap.paramMap.sex === '1') gender = '남자'
   else if (data.wxcResultMap.paramMap.sex !== '1') gender = '여자'
   else gender = 'Error'
-
-  console.log('1번', [
-    {
-      name: data.userInfo.name,
-      healthScore: Number(data.userInfo.healthScore),
-      userGender: gender,
-      age: Number(data.wxcResultMap.paramMap.age),
-      height: Number(data.wxcResultMap.paramMap.resHeight),
-    },
-  ])
 
   return [
     {
@@ -72,11 +61,6 @@ export const fetchYearsChartInfo = () => {
     scoreAndYears.push(obj)
   })
 
-  console.log('2번', {
-    comparison: minusOrPlus,
-    yearsInfo: scoreAndYears,
-  })
-
   return {
     comparison: minusOrPlus,
     yearsInfo: scoreAndYears,
@@ -100,15 +84,6 @@ export const fetchAverageInfo = () => {
   else if (result > 0) comparision = `${result}점 높아요.`
   else if (result === 0) comparision = '평균과 같아요'
   else comparision = 'Error'
-
-  console.log('3번', {
-    percent,
-    comparision,
-    score: [
-      { x: '나', value: Number(USER_SCORE) },
-      { x: '30대 남성', value: Number(data.wxcResultMap.hscore_peer) },
-    ],
-  })
 
   return {
     percent,
@@ -173,10 +148,6 @@ const expenseForecast = () => {
 }
 
 export const fetchForecastInfo = () => {
-  console.log('4번', {
-    health: healthForecast(),
-    expense: expenseForecast(),
-  })
   return { health: healthForecast(), expense: expenseForecast() }
 }
 
