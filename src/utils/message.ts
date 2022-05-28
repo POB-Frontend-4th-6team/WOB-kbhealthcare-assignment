@@ -45,21 +45,14 @@ const words: IWords = {
 export const getScoreDiffMessage = (compareTarget: CompareTarget, diff: number, ageGroup?: string, sex?: string) => {
   if (!Object.keys(words).includes(compareTarget)) return '-'
 
-  const { startMessage, endMessage } = words[compareTarget]
+  let { startMessage } = words[compareTarget]
+  const { endMessage } = words[compareTarget]
 
   if (compareTarget === 'groupAverage') {
-    if (diff === 0)
-      return { startMessage: `${ageGroup} ${sex} ${startMessage.same}`, endMessage: endMessage.same, diff }
-    if (diff > 0)
-      return {
-        startMessage: `${ageGroup} ${sex} ${startMessage.increased}`,
-        endMessage: `${diff}${endMessage.increased}`,
-        diff,
-      }
-    return {
-      startMessage: `${ageGroup} ${sex} ${startMessage.decreased}`,
-      endMessage: `${diff}${endMessage.decreased}`,
-      diff,
+    startMessage = {
+      increased: `${ageGroup} ${sex} ${startMessage.increased}`,
+      decreased: `${ageGroup} ${sex} ${startMessage.decreased}`,
+      same: `${ageGroup} ${sex} ${startMessage.same}`,
     }
   }
 
