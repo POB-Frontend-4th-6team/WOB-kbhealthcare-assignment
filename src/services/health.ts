@@ -265,7 +265,7 @@ export const getScoreDatas = () => {
   }
 }
 
-const getScoreDiffMessageAll = () => {
+export const getScoreDiffMessageAll = () => {
   const {
     diffScoreLastYear,
     diffScoreGroupAverage,
