@@ -40,9 +40,7 @@ const LoginPage = () => {
 
   const handleLoginOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (validateUserId() !== false) {
-      login()
-    }
+    if (validateUserId()) login()
   }
 
   return (
