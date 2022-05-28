@@ -4,9 +4,9 @@ import store from 'storejs'
 const PrivateRoute = () => {
   const location = useLocation()
 
-  const isAuthenticated = store.get('userId')
+  const isUserName = store.get('userName')
 
-  if (!isAuthenticated) {
+  if (!isUserName) {
     return <Navigate to='/login' state={{ from: location }} />
   }
 
