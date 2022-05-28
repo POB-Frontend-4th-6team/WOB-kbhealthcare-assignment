@@ -17,7 +17,9 @@ interface IHealthManageCardData {
   tag: string[]
 }
 
-interface IProcessedHealthManageCardData extends IHealthManageCardData {
+interface IProcessedHealthManageCardData {
+  title: string
+  value: string
   isSmkDrnkExerciseDetail: boolean | string
   standardOfNormal: string
   signatureColor: string
@@ -33,7 +35,7 @@ const HealthManageCard = ({
 }) => {
   const processHealthManageCardData = (subject: string): IProcessedHealthManageCardData => {
     const cardData: {
-      [key: string]: any
+      [key: string]: IProcessedHealthManageCardData
     } = {
       resBMI: {
         title: '체질량 지수는',
