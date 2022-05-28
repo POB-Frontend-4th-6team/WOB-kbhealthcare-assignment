@@ -15,7 +15,8 @@ const removeStringifiedArray = (array: string) => {
 }
 
 export const fetchUserIdInfo = () => {
-  return data.userInfo.userId
+  console.log([{ userId: data.userInfo.userId, name: data.userInfo.name }])
+  return [{ userId: data.userInfo.userId, name: data.userInfo.name }]
 }
 
 export const fetchPersonalHealthInfo = () => {

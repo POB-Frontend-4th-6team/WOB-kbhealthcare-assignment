@@ -3,19 +3,9 @@ import HealthScore from './HealthScore'
 
 import { HealthInfo } from 'assets/svgs'
 
-import { fetchAverageInfo, fetchForecastInfo, fetchYearsChartInfo } from 'services/health'
-
 const UserInfo = () => {
-  const check = () => {
-    fetchAverageInfo()
-    fetchForecastInfo()
-    fetchYearsChartInfo()
-  }
   return (
     <section className={styles.container}>
-      <button type='button' onClick={check}>
-        1239123123
-      </button>
       <h2>
         <span>김헬스님의 건강점수</span>
         <HealthInfo className={styles.healthInfoIcon} />
