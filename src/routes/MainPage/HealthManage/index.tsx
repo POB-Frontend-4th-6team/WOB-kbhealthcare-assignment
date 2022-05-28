@@ -1,5 +1,5 @@
 ﻿import styles from './healthManage.module.scss'
-import HealthManageCard from '../_components/HealthManageCard'
+import HealthManageCard from './HealthManageCard'
 import { getHealthManageData } from 'services/health'
 
 const HealthManage = () => {
