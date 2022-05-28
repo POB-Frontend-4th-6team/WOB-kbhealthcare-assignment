@@ -9,7 +9,7 @@ import CHART_STYLE from './chartStyles'
 
 // datum은 CallbackArgs 타입 안에 있는 값 중 any 타입
 const setColor = (data: YearsType[], datum: any, recentColor: string, elseColor: string) => {
-  return datum.year === data[data.length - 1].year ? recentColor : elseColor
+  return datum.x === data[data.length - 1].x ? recentColor : elseColor
 }
 
 const YearsChart = () => {
