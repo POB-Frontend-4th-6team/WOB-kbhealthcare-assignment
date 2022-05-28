@@ -65,9 +65,9 @@ export const fetchYearsChartInfo = () => {
   const scoreAndYears: YearsType[] = []
 
   value.forEach((score, i) => {
-    let obj: YearsType = {}
+    const obj: YearsType = {}
+    obj.x = year[i]
     obj.value = Number(score)
-    obj.year = year[i]
     scoreAndYears.push(obj)
   })
 
@@ -104,10 +104,8 @@ export const fetchAverageInfo = () => {
     percent,
     comparision,
     score: [
-      {
-        myScore: Number(USER_SCORE),
-        averageScore: Number(data.wxcResultMap.hscore_peer),
-      },
+      { x: '나', value: Number(USER_SCORE) },
+      { x: '30대 남성', value: Number(data.wxcResultMap.hscore_peer) },
     ],
   })
 
@@ -115,10 +113,8 @@ export const fetchAverageInfo = () => {
     percent,
     comparision,
     score: [
-      {
-        myScore: Number(USER_SCORE),
-        averageScore: Number(data.wxcResultMap.hscore_peer),
-      },
+      { x: '나', value: Number(USER_SCORE) },
+      { x: '30대 남성', value: Number(data.wxcResultMap.hscore_peer) },
     ],
   }
 }
@@ -140,10 +136,8 @@ const healthForecast = () => {
   return {
     comparison,
     score: [
-      {
-        myScore: Number(USER_SCORE),
-        forecastValue,
-      },
+      { x: '나', value: Number(USER_SCORE) },
+      { x: '10년 후', value: forecastValue },
     ],
   }
 }
@@ -171,10 +165,8 @@ const expenseForecast = () => {
   return {
     comparison,
     score: [
-      {
-        myScore: expense,
-        forecastValue: formatValue,
-      },
+      { x: '나', value: expense },
+      { x: '10년 후', value: formatValue },
     ],
   }
 }
