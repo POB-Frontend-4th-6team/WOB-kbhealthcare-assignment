@@ -4,6 +4,7 @@ import {
   getScoreDiffLastYearMessage,
   getCostDiffAfterTenYearsMessage,
   getScoreDiffAfterTenYearsMessage,
+  getStatusMessage,
 } from 'utils/message'
 import { calculation } from 'utils/math'
 import { ScoreType } from 'types/health'
@@ -69,7 +70,7 @@ export const fetchYearsChartInfo = () => {
 
   return {
     message,
-    diff: scoreComparedToPreviousYear,
+    status: getStatusMessage(scoreComparedToPreviousYear),
     yearsInfo: scoreAndYears,
   }
 }
@@ -94,7 +95,7 @@ export const fetchAverageInfo = () => {
   return {
     percent,
     message,
-    diff: result,
+    status: getStatusMessage(result),
     score: [
       { x: '나', value: Number(USER_SCORE) },
       { x: '30대 남성', value: Number(data.wxcResultMap.hscore_peer) },
@@ -112,7 +113,7 @@ export const healthForecast = () => {
   const message = getScoreDiffAfterTenYearsMessage(compareToFuture)
 
   return {
-    diff: compareToFuture,
+    status: getStatusMessage(compareToFuture),
     message,
     score: [
       { x: '나', value: Number(USER_SCORE) },
@@ -137,7 +138,7 @@ export const expenseForecast = () => {
   const expense = Number(currentExpenseString).toLocaleString()
 
   return {
-    diff: expenseComparedToFuture,
+    status: getStatusMessage(expenseComparedToFuture),
     message,
     score: [
       { x: '나', value: expense },

@@ -86,3 +86,9 @@ export const getCostDiffAfterTenYearsMessage = (diff: number) => {
   if (diff > 0) return { startMessage: startMessage.increased, endMessage: `${diffScaled}${endMessage.increased}` }
   return { startMessage: startMessage.decreased, endMessage: `${diffScaled}${endMessage.decreased}` }
 }
+
+export const getStatusMessage = (diff: number): 'increased' | 'same' | 'decreased' => {
+  if (diff > 0) return 'increased'
+  if (diff === 0) return 'same'
+  return 'decreased'
+}
