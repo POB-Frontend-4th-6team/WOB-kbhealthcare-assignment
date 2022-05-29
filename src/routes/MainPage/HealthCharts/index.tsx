@@ -5,10 +5,10 @@ import styles from './healthCharts.module.scss'
 import ScoreChart from '../_components/Chart'
 
 const HealthCharts = () => {
-  const { yearsInfo } = fetchYearsChartInfo()
-  const { score: averageScore } = fetchAverageInfo()
-  const { score: healthScore } = fetchForecastInfo().health
-  const { score: expenseScore } = fetchForecastInfo().expense
+  const { yearsInfo, message: yearMessage } = fetchYearsChartInfo()
+  const { score: averageScore, message: groupMessage } = fetchAverageInfo()
+  const { score: healthScore, message: scoreForecastMessage } = fetchForecastInfo().health
+  const { score: expenseScore, message: expenseForecastMessage } = fetchForecastInfo().expense
 
   // datum은 CallbackArgs 타입 안에 있는 값 중 any 타입
   const setColor = (data: ScoreType[], datum: any, myColor: string, elseColor: string, isYears: boolean) => {
@@ -26,29 +26,23 @@ const HealthCharts = () => {
           검진결과 자세히
         </button>
         <p className={styles.compare}>
-          총점이
-          <br />
-          지난해 보다 <mark>13점 낮아졌어요</mark>
+          {yearMessage.startMessage} <mark>{yearMessage.endMessage}</mark>
         </p>
         <ScoreChart data={yearsInfo} setColor={setColor} isYears />
         <p className={styles.compare}>
-          10년 후 예상 건강점수는
-          <br />
-          현재보다 <mark>85점 낮아요</mark>
+          {groupMessage.startMessage} <mark>{groupMessage.endMessage}</mark>
         </p>
         <ScoreChart data={averageScore} setColor={setColor} isYears={false} />
       </section>
+
       <section className={styles.container}>
         <h2>나의 10년 후 건강 예측</h2>
         <p className={styles.compare}>
-          10년 후 예상 건강점수는
-          <br />
-          현재보다 <mark>85점 낮아요</mark>
+          {scoreForecastMessage.startMessage} <mark>{scoreForecastMessage.endMessage}</mark>
         </p>
         <ScoreChart data={healthScore} setColor={setColor} isYears={false} />
         <p className={styles.compare}>
-          10년 후 예상 의료비는 <br />
-          현재보다 <mark>36,120원 낮아요</mark>
+          {expenseForecastMessage.startMessage} <mark>{expenseForecastMessage.endMessage}</mark>
         </p>
         <ScoreChart data={expenseScore} setColor={setColor} isYears={false} />
       </section>
