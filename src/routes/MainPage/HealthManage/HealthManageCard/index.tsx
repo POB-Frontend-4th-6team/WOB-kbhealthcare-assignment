@@ -22,7 +22,7 @@ interface IProcessedHealthManageCardData {
   title: string
   value: string
   isSmkDrnkExerciseDetail: boolean | string
-  standardOfNormal: string
+  standardOfNormal?: string
   svg: JSX.Element
 }
 
@@ -62,7 +62,6 @@ const HealthManageCard = ({
         title: '흡연',
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
-        standardOfNormal: '',
         svg: <SmokeIcon />,
       },
       resFastingBloodSuger: {
@@ -76,14 +75,12 @@ const HealthManageCard = ({
         title: '음주',
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
-        standardOfNormal: '',
         svg: <DrnkIcon />,
       },
       exerciQty: {
         title: '운동량',
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
-        standardOfNormal: '',
         svg: <ExerciseIcon />,
       },
       resGFR: {
@@ -119,7 +116,7 @@ const HealthManageCard = ({
             </>
           )}
         </p>
-        <p className={styles.normal}>{standardOfNormal}</p>
+        {standardOfNormal && <p className={styles.normal}>{standardOfNormal}</p>}
         <ul className={styles.tag}>
           {tag.map((el) => {
             if (el) {
