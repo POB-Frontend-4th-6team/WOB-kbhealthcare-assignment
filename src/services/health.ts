@@ -36,6 +36,7 @@ export const fetchPersonalHealthInfo = () => {
     userGender: gender,
     age: Number(data.wxcResultMap.paramMap.age),
     height: Number(data.wxcResultMap.paramMap.resHeight),
+    date: Number(data.userInfo.healthDate),
   }
 }
 
