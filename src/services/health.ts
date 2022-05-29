@@ -40,37 +40,32 @@ export const fetchPersonalHealthInfo = () => {
 }
 
 export const fetchYearsChartInfo = () => {
-  const scoreComparedToPreviousYear = calculation(
-    YEARLY_SCORE[YEARLY_SCORE.length - 1].SCORE,
-    YEARLY_SCORE[YEARLY_SCORE.length - 2].SCORE
-  )
+  const scoreAndYears = YEARLY_SCORE.map((yearData) => ({
+    x: yearData.SCORE,
+    value: Number(yearData.SUBMIT_DATE.slice(0, 4)),
+  }))
+
   const currentYear = new Date().getFullYear()
-  const scoreLastYear = Number(YEARLY_SCORE.find((d) => currentYear - 1 === Number(d.SUBMIT_DATE.slice(0, 4)))?.SCORE)
+  const targetYear = scoreAndYears?.[scoreAndYears.length - 2].value ?? 0
+  const yearMessage = currentYear - 1 === targetYear ? '지난해' : `${targetYear}년`
 
-  const message = getScoreDiffLastYearMessage(scoreComparedToPreviousYear)
+  let scoreComparedToPreviousYear = 0
+  let message = { startMessage: '', endMessage: '' }
 
-  const value = YEARLY_SCORE.map((score) => score.SCORE)
-  const year = YEARLY_SCORE.map((date) => date.SUBMIT_DATE.slice(0, 4))
-
-  const scoreAndYears: YearsType[] = []
-
-  if (year.length === 0) {
+  if (scoreAndYears.length > 2) {
+    scoreComparedToPreviousYear = calculation(
+      YEARLY_SCORE[YEARLY_SCORE.length - 1].SCORE,
+      YEARLY_SCORE[YEARLY_SCORE.length - 2].SCORE
+    )
+    message = getScoreDiffLastYearMessage(scoreComparedToPreviousYear, yearMessage)
+  } else if (scoreAndYears.length === 1) {
+    const { x, value } = scoreAndYears[0]
+    message.startMessage = `${value}년 건강점수는`
+    message.endMessage = `${x}점입니다`
+  } else {
     message.startMessage = '연도별 건강점수가 아직 없습니다'
     message.endMessage = ''
   }
-
-  if (year.length === 1) {
-    message.startMessage = `${year[0]}년 건강점수는`
-    message.endMessage = `${value[0]}점입니다`
-  }
-
-  value.forEach((score, i) => {
-    const obj: YearsType = {}
-
-    obj.x = year[i]
-    obj.value = Number(score)
-    scoreAndYears.push(obj)
-  })
 
   return {
     message,
