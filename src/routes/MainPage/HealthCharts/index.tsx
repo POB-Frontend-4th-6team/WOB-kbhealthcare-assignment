@@ -3,10 +3,6 @@ import { ScoreType } from 'types/health'
 
 import styles from './healthCharts.module.scss'
 import ScoreChart from '../_components/Chart'
-// import YearsChart from './YearsChart'
-// import AverageChart from './AverageChart'
-// import HealthForecastChart from './HealthForecastChart'
-// import CostForecastChart from './CostForecastChart'
 
 const HealthCharts = () => {
   const { yearsInfo } = fetchYearsChartInfo()
