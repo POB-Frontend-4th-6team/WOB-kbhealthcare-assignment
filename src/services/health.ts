@@ -41,13 +41,13 @@ export const fetchPersonalHealthInfo = () => {
 
 export const fetchYearsChartInfo = () => {
   const scoreAndYears = YEARLY_SCORE.map((yearData) => ({
-    x: yearData.SCORE,
-    value: Number(yearData.SUBMIT_DATE.slice(0, 4)),
+    value: Number(yearData.SCORE),
+    x: yearData.SUBMIT_DATE.slice(0, 4),
   }))
 
   const currentYear = new Date().getFullYear()
-  const targetYear = scoreAndYears?.[scoreAndYears.length - 2].value ?? 0
-  const yearMessage = currentYear - 1 === targetYear ? '지난해' : `${targetYear}년`
+  const targetYear = scoreAndYears?.[scoreAndYears.length - 2].x ?? 0
+  const yearMessage = currentYear - 1 === Number(targetYear) ? '지난해' : `${targetYear}년`
 
   let scoreComparedToPreviousYear = 0
   let message = { startMessage: '', endMessage: '' }
@@ -60,8 +60,8 @@ export const fetchYearsChartInfo = () => {
     message = getScoreDiffLastYearMessage(scoreComparedToPreviousYear, yearMessage)
   } else if (scoreAndYears.length === 1) {
     const { x, value } = scoreAndYears[0]
-    message.startMessage = `${value}년 건강점수는`
-    message.endMessage = `${x}점입니다`
+    message.startMessage = `${x}년 건강점수는`
+    message.endMessage = `${value}점입니다`
   } else {
     message.startMessage = '연도별 건강점수가 아직 없습니다'
     message.endMessage = ''
