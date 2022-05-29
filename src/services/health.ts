@@ -6,7 +6,7 @@ import {
   getScoreDiffAfterTenYearsMessage,
 } from 'utils/message'
 import { calculation } from 'utils/math'
-import { YearsType } from 'types/health'
+import { ScoreType } from 'types/health'
 
 interface IHealthManageData {
   [key: string]: string
