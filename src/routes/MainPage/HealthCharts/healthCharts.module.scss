@@ -28,13 +28,9 @@
     line-height: 20px;
 
     mark {
-      color: colors.$MARK_COLOR;
+      font-weight: 500;
       white-space: pre-wrap;
-
-      &.percent {
-        font-weight: 500;
-        background: linear-gradient(colors.$WHITE 50%, colors.$MAIN_COLOR 50%);
-      }
+      background: linear-gradient(colors.$WHITE 50%, colors.$MAIN_COLOR 50%);
 
       &.increased {
         color: colors.$MARK_COLOR_INCREASED;
@@ -52,5 +48,20 @@
 
   .textContainer {
     @include flexbox.flexbox(between, center);
+    margin-top: 30px;
+
+    .compare {
+      margin-top: 0;
+    }
+
+    mark {
+      font-weight: 500;
+      color: colors.$MAIN_TEXT_COLOR;
+      white-space: pre-wrap;
+
+      &.percent {
+        background: linear-gradient(colors.$WHITE 50%, colors.$MAIN_COLOR 50%);
+      }
+    }
   }
 }
