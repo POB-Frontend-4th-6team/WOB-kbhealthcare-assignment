@@ -10,8 +10,6 @@ const UserInfo = () => {
   const userName = store.get('userName')
   const getUserData = fetchPersonalHealthInfo()
 
-  console.log(getUserData.date)
-
   return (
     <section className={styles.container}>
       <h2>
