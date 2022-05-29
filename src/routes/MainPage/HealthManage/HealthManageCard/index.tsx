@@ -1,3 +1,4 @@
+import { cx } from 'styles'
 import styles from './healthManageCard.module.scss'
 import {
   HealthIcon1 as BloodPressureIcon,
@@ -22,7 +23,6 @@ interface IProcessedHealthManageCardData {
   value: string
   isSmkDrnkExerciseDetail: boolean | string
   standardOfNormal: string
-  signatureColor: string
   svg: JSX.Element
 }
 
@@ -42,7 +42,6 @@ const HealthManageCard = ({
         value: `${healthManageCardData.value}kg/㎡`,
         isSmkDrnkExerciseDetail: false,
         standardOfNormal: '정상 : 18.5 ~ 22.9 kg/㎡',
-        signatureColor: '#7bcf3d',
         svg: <BMIIcon />,
       },
       resBloodPressure: {
@@ -50,7 +49,6 @@ const HealthManageCard = ({
         value: `${healthManageCardData.value}mmHg`,
         isSmkDrnkExerciseDetail: false,
         standardOfNormal: '정상 : 이완 60~79 / 수축 90~119 mmHg',
-        signatureColor: '#ca64e8',
         svg: <BloodPressureIcon />,
       },
       resTotalCholesterol: {
@@ -58,7 +56,6 @@ const HealthManageCard = ({
         value: `${healthManageCardData.value}mg/dL`,
         isSmkDrnkExerciseDetail: false,
         standardOfNormal: '정상 : 200 mg/dL 이하',
-        signatureColor: '#3f60f0',
         svg: <CholesterolIcon />,
       },
       smkQty: {
@@ -66,7 +63,6 @@ const HealthManageCard = ({
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
         standardOfNormal: '',
-        signatureColor: '#68a0eb',
         svg: <SmokeIcon />,
       },
       resFastingBloodSuger: {
@@ -74,7 +70,6 @@ const HealthManageCard = ({
         value: `${healthManageCardData.value}mg/dL`,
         isSmkDrnkExerciseDetail: false,
         standardOfNormal: '정상 : 69~99 mg/dL',
-        signatureColor: '#d990f0',
         svg: <FastingBloodSugerIcon />,
       },
       drnkQty: {
@@ -82,7 +77,6 @@ const HealthManageCard = ({
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
         standardOfNormal: '',
-        signatureColor: '#e99318',
         svg: <DrnkIcon />,
       },
       exerciQty: {
@@ -90,7 +84,6 @@ const HealthManageCard = ({
         value: '',
         isSmkDrnkExerciseDetail: `${healthManageCardData.boj[0]}`,
         standardOfNormal: '',
-        signatureColor: '#73ccbc',
         svg: <ExerciseIcon />,
       },
       resGFR: {
@@ -98,7 +91,6 @@ const HealthManageCard = ({
         value: `${healthManageCardData.value}mL/min `,
         isSmkDrnkExerciseDetail: false,
         standardOfNormal: '정상 : 60 mL/min 이상',
-        signatureColor: '#edb3b4',
         svg: <GFRIcon />,
       },
     }
@@ -109,7 +101,7 @@ const HealthManageCard = ({
   const { tag } = healthManageCardData
   const boj = healthManageCardData.boj.slice(1)
 
-  const { title, value, isSmkDrnkExerciseDetail, standardOfNormal, signatureColor, svg } = processHealthManageCardData(
+  const { title, value, isSmkDrnkExerciseDetail, standardOfNormal, svg } = processHealthManageCardData(
     healthManageCardData.title
   )
 
@@ -118,9 +110,7 @@ const HealthManageCard = ({
       <div className={styles.icon}>{svg}</div>
       <div className={styles.info}>
         <h3>0{idx}</h3>
-        <p className={styles.healthTitle} style={{ color: signatureColor }}>
-          {title}
-        </p>
+        <p className={cx(styles.healthTitle, styles[healthManageCardData.title])}>{title}</p>
         <p className={styles.detail}>
           {isSmkDrnkExerciseDetail || (
             <>
@@ -140,7 +130,7 @@ const HealthManageCard = ({
         </ul>
       </div>
       <div className={styles.manage}>
-        <h4 style={{ color: signatureColor }}>이렇게 관리해 보세요!</h4>
+        <h4 className={styles[healthManageCardData.title]}>이렇게 관리해 보세요!</h4>
         <ul>
           {boj.map((el) => {
             return <li key={`key_${el}`}>{el}</li>
