@@ -1,6 +1,6 @@
-export interface YearsType {
+export interface ScoreType {
   value?: number
-  year?: string
+  x?: string
 }
 
 export interface IHealthManageCardData {

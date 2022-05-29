@@ -1,10 +1,9 @@
 const CHART_STYLE = {
   value: {
-    x: 'year',
+    x: 'x',
     y: 'value',
   },
   label: {
-    fontSize: 16,
     fontWeight: 'bold',
   },
 }
