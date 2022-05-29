@@ -2,7 +2,7 @@ import styles from './userInfo.module.scss'
 import { HealthInfoArrow } from 'assets/svgs'
 import { VictoryPie } from 'victory'
 
-const HealthScore = ({ healthScore }: { healthScore: number }) => {
+const HealthScore = ({ healthScore, date }: { healthScore: number; date: string }) => {
   const percent = (healthScore / 1000) * 100
   const total = 100 - percent
 
@@ -31,7 +31,7 @@ const HealthScore = ({ healthScore }: { healthScore: number }) => {
         <h1 className={styles.score}>{healthScore}</h1>
         <p className={styles.scoreName}>점</p>
       </div>
-      <p className={styles.date}>2021.08.20</p>
+      <p className={styles.date}>{date}</p>
       <p>
         건강검진결과 가져오기
         <HealthInfoArrow className={styles.healthInfoArrowIcon} />

@@ -30,13 +30,18 @@ export const fetchPersonalHealthInfo = () => {
   else if (data.wxcResultMap.paramMap.sex !== '1') gender = '여자'
   else gender = 'Error'
 
+  const dateArr = data.userInfo.healthDate.split('')
+  dateArr.splice(4, 0, '.')
+  dateArr.splice(7, 0, '.')
+  const dateStr = dateArr.join('')
+
   return {
     name: data.userInfo.userId,
     healthScore: Number(data.userInfo.healthScore),
     userGender: gender,
     age: Number(data.wxcResultMap.paramMap.age),
     height: Number(data.wxcResultMap.paramMap.resHeight),
-    date: Number(data.userInfo.healthDate),
+    date: dateStr,
   }
 }
 

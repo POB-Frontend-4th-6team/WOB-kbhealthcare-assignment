@@ -10,8 +10,6 @@ const UserInfo = () => {
   const userName = store.get('userName')
   const getUserData = fetchPersonalHealthInfo()
 
-  console.log(getUserData.date)
-
   return (
     <section className={styles.container}>
       <h2>
@@ -19,7 +17,7 @@ const UserInfo = () => {
         <HealthInfo className={styles.healthInfoIcon} />
       </h2>
       <div className={styles.healthScoreWrapper}>
-        <HealthScore healthScore={getUserData.healthScore} />
+        <HealthScore healthScore={getUserData.healthScore} date={getUserData.date} />
         <div className={styles.infoBox}>
           <span>기본 정보</span>
           <dl>
