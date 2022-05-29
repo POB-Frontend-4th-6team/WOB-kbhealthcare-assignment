@@ -23,7 +23,7 @@ export const getHealthManageData = () => {
 
   const { boj, paramMap }: { boj: IHealthManageData; paramMap: IHealthManageData } = wxcResultMap
 
-  const healthMangeCardData = property.map((value) => {
+  const healthManageCardData = property.map((value) => {
     const tag: string[] = []
     healthTagList.forEach((currentValue) => {
       if (currentValue.tagId === value) tag.push(currentValue.tag1, currentValue.tag2, currentValue.tag3)
@@ -44,6 +44,6 @@ export const getHealthManageData = () => {
 
   return {
     wMymaxHscoreDy,
-    healthMangeCardData,
+    healthManageCardData,
   }
 }
