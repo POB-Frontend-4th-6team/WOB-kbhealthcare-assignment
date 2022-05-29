@@ -1,3 +1,5 @@
+# KB Healthcare Assignment
+
 ## 참여 인원
 
  - 김영만 [💻 Github](https://github.com/sksn12)
@@ -53,4 +55,4 @@ Eslint-config-prettier: `"^8.5.0"` <br/>
 ### 건강 점수 분석 결과
 
 
-## 어려웠던 점
+## 느낀 점
