@@ -102,7 +102,6 @@ const HealthManageCard = ({
         svg: <GFRIcon />,
       },
     }
-
     return cardData[subject]
   }
 
