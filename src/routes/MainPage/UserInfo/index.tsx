@@ -17,16 +17,16 @@ const UserInfo = () => {
         <HealthInfo className={styles.healthInfoIcon} />
       </h2>
       <div className={styles.healthScoreWrapper}>
-        <HealthScore healthScore={getUserData[0].healthScore} />
+        <HealthScore healthScore={getUserData.healthScore} />
         <div className={styles.infoBox}>
           <span>기본 정보</span>
           <dl>
             <dt>성별</dt>
-            <dd>{getUserData[0].userGender}</dd>
+            <dd>{getUserData.userGender}</dd>
             <dt>나이</dt>
-            <dd>{getUserData[0].age}세</dd>
+            <dd>{getUserData.age}세</dd>
             <dt>키</dt>
-            <dd>{getUserData[0].height}cm</dd>
+            <dd>{getUserData.height}cm</dd>
           </dl>
         </div>
       </div>
