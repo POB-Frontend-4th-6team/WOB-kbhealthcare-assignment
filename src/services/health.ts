@@ -1,7 +1,7 @@
 import data from 'assets/jsons/user_info.json'
 import { getScoreDiffMessage } from 'utils/message'
 import { calculation } from 'utils/math'
-import { YearsType } from 'types/health'
+import { ScoreType } from 'types/health'
 
 interface IHealthManageData {
   [key: string]: string
@@ -52,10 +52,10 @@ export const fetchYearsChartInfo = () => {
   const value = YEARLY_SCORE.map((score) => score.SCORE)
   const year = YEARLY_SCORE.map((date) => date.SUBMIT_DATE.slice(0, 4))
 
-  const scoreAndYears: YearsType[] = []
+  const scoreAndYears: ScoreType[] = []
 
   value.forEach((score, i) => {
-    const obj: YearsType = {}
+    const obj: ScoreType = {}
 
     obj.x = year[i]
     obj.value = Number(score)
