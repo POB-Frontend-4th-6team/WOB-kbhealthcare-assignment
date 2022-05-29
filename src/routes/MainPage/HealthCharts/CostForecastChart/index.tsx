@@ -1,27 +1,23 @@
+import { fetchForecastInfo } from 'services/health'
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryLine, VictoryScatter } from 'victory'
 import { CallbackArgs } from 'victory-core'
+import { setChartColor } from '../AverageChart'
 
-import { fetchAverageInfo } from 'services/health'
+import styles from './costForecastChart.module.scss'
 
-import styles from './averageChart.module.scss'
-
-export const setChartColor = (datum: any, myColor: string, compareColor: string) => {
-  return datum.x === '나' ? myColor : compareColor
-}
-
-const AverageChart = () => {
-  const { score } = fetchAverageInfo()
+const CostForecastChart = () => {
+  const { score } = fetchForecastInfo().expense
 
   return (
     <div className={styles.container}>
       <VictoryChart height={300}>
         <VictoryAxis style={{ axis: { stroke: 'white' }, tickLabels: { fontSize: 25 } }} />
         <VictoryBar
-          barWidth={60}
           data={score}
-          labels={({ datum }) => `${datum.value}점`}
+          barWidth={60}
           x='x'
           y='value'
+          labels={({ datum }) => datum.value}
           style={{
             data: {
               fill: ({ datum }: CallbackArgs) => setChartColor(datum, '#ffd300', '#fe612c'),
@@ -51,4 +47,4 @@ const AverageChart = () => {
   )
 }
 
-export default AverageChart
+export default CostForecastChart

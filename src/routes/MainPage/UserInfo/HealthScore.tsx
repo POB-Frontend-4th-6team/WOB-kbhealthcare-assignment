@@ -2,8 +2,8 @@ import styles from './userInfo.module.scss'
 import { HealthInfoArrow } from 'assets/svgs'
 import { VictoryPie } from 'victory'
 
-const HealthScore = () => {
-  const percent = (875 / 1000) * 100
+const HealthScore = ({ healthScore }: { healthScore: number }) => {
+  const percent = (healthScore / 1000) * 100
   const total = 100 - percent
 
   return (
