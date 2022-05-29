@@ -30,15 +30,13 @@ export const fetchPersonalHealthInfo = () => {
   else if (data.wxcResultMap.paramMap.sex !== '1') gender = '여자'
   else gender = 'Error'
 
-  return [
-    {
-      name: data.userInfo.userId,
-      healthScore: Number(data.userInfo.healthScore),
-      userGender: gender,
-      age: Number(data.wxcResultMap.paramMap.age),
-      height: Number(data.wxcResultMap.paramMap.resHeight),
-    },
-  ]
+  return {
+    name: data.userInfo.userId,
+    healthScore: Number(data.userInfo.healthScore),
+    userGender: gender,
+    age: Number(data.wxcResultMap.paramMap.age),
+    height: Number(data.wxcResultMap.paramMap.resHeight),
+  }
 }
 
 export const fetchYearsChartInfo = () => {
@@ -82,7 +80,7 @@ export const fetchYearsChartInfo = () => {
 }
 
 export const fetchAverageInfo = () => {
-  const { userGender, age } = fetchPersonalHealthInfo()[0]
+  const { userGender, age } = fetchPersonalHealthInfo()
   const dividedAge = age - (age % 10)
   const ageGroup = dividedAge >= 10 ? `${dividedAge}대` : '10대 미만'
 
