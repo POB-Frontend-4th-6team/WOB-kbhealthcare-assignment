@@ -26,16 +26,15 @@ const HealthScore = ({ healthScore, date }: { healthScore: number; date: string 
           colorScale={['#eeeeee', '#ffd300']}
         />
       </div>
-
       <div className={styles.scoreBox}>
-        <h1 className={styles.score}>{healthScore}</h1>
-        <p className={styles.scoreName}>점</p>
+        <h3 className={styles.score}>{healthScore}</h3>
+        <span>점</span>
       </div>
       <p className={styles.date}>{date}</p>
-      <p>
+      <button type='button'>
         건강검진결과 가져오기
         <HealthInfoArrow className={styles.healthInfoArrowIcon} />
-      </p>
+      </button>
     </div>
   )
 }
